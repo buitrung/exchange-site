@@ -52,12 +52,12 @@ function renderOrders(orders) {
 (function() {
   let socket = io.connect(window.location.origin);
 
-  socket.on('fetch_orders', orders => {
+  socket.on('fetch_orders', (orders) => {
     renderOrders(orders);
   });
 
   // Since we use socket.io to fetch orders, no need to call API by Ajax when start
-  // getOrders(function(orders) {
+  // getOrders((orders) => {
   //   renderOrders(orders);
   // });
 })();

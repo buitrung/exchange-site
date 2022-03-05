@@ -134,10 +134,16 @@ const io = socketio(server, {
 });
 
 io.on('connection', (socket) => {
-  console.log("New user connected")
+  console.log('New user connected');
 
-  setInterval(async () => {
+  let interval_id = setInterval(async () => {
     let orders = await getOrders();
     io.sockets.emit('fetch_orders', orders);
   }, 3000);
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+    clearInterval(interval_id);
+  });
 });
+
